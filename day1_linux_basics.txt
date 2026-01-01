@@ -1,0 +1,10 @@
+DAY 1 Linux
+
+Commands learned:
+cd ~/Desktop    ---To go to the desktop directory cd--change directory
+mkdir foldername   ---To create a folder user mkdir and write the folder name
+pwd --- To check the current path use pwd
+ls --- Shows the list of files
+touch file.txt --- To create a file
+vim file.txt --- To edit/write the file 
+rm --- delete file
