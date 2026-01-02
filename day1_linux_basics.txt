@@ -8,3 +8,26 @@ ls --- Shows the list of files
 touch file.txt --- To create a file
 vim file.txt --- To edit/write the file 
 rm --- delete file
+ls -l filename --- Te see the permission for the file
+code filename --- To open the file in vs code
+chmod 777 filename  --- To set the read write excute for owner group others
+EX: read-4, write-2, execute-1  
+chmod 777 1st 7 is for owner 
+2nd is for group
+3rd 7 is for others
+EX2: chmod 762 filename
+For owner he has read write execute
+For group he has only read and write access
+For others only execute access
+chown: change owner
+EX:  chown ownername filename --this is owner 
+chown :groupname filename  ---this is for group
+chown ownername:groupname filename ---this is for both
+To find the owner and group name use ls -l filename 
+
+
+GIT:
+git remote add origin (giturl)
+git commit -m "Commited changes"
+git push -u origin main
+
