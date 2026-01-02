@@ -2,12 +2,12 @@ DAY 1 Linux
 
 Commands learned:
 cd ~/Desktop    ---To go to the desktop directory cd--change directory
-mkdir foldername   ---To create a folder user mkdir and write the folder name
+mkdir foldername   ---To create a folder use mkdir and write the folder name
 pwd --- To check the current path use pwd
 ls --- Shows the list of files
 touch file.txt --- To create a file
 vim file.txt --- To edit/write the file 
-rm --- delete file
+rm file.txt--- delete file
 ls -l filename --- Te see the permission for the file
 code filename --- To open the file in vs code
 chmod 777 filename  --- To set the read write excute for owner group others
