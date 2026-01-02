@@ -1,0 +1,10 @@
+Day 2
+ps ---To view the processes
+df ---Disk usage
+kill pid ---Use the process id to kill/stop the process
+echo "Message"  ---give the message to be printed
+date ---shows current date and time
+To create sh file :
+vim filename.sh ---- Enter the code to run 
+To run the file:
+sh filename.sh/ bash filename.sh  ---Use any one of this to run 
