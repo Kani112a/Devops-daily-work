@@ -30,4 +30,8 @@ GIT:
 git remote add origin (giturl)
 git commit -m "Commited changes"
 git push -u origin main
+I have made the changes in some how to push it to github:
+git add filename   --- to add in the list
+git commit -m "Updated message" --commit with the message
+git push -u origin main  ---push it 
 
