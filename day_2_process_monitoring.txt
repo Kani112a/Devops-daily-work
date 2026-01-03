@@ -7,4 +7,19 @@ date ---shows current date and time
 To create sh file :
 vim filename.sh ---- Enter the code to run 
 To run the file:
-sh filename.sh/ bash filename.sh  ---Use any one of this to run 
+sh filename.sh/ bash filename.sh  ---Use any one of this to run
+
+
+Explaination of the code in day2_variables_conditions.sh file
+Tells the system: “Use Bash shell to run this script”
+Without this, Linux may not know which shell to use
+DISK=$(df / | tail -1 | awk '{print $5}' | cut -d'%' -f1)
+df/   shows disk usage of the root filesystem
+tail -1   ---> takes only the last line
+awk '{print $5}'  --->prints 5th column
+cut -d'%' -f1    --->Remove the symbol 
+stores the value in the variable DISK
+It will loop 3 times for i
+-gt refers greater than 
+fi   ---> end of if condition
+done   --->end of loop
