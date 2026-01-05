@@ -1,0 +1,49 @@
+Day 3
+git log -----> To show the history of committed changes
+git log --oneline    ---> To show history of commited changes in a single line
+git checkout main  ---> To switch the branch after that the chnages will happen on that branch name 
+git merge feature-branch   ----> All the changes from feature-branch will get merged to the current branch 
+git branch   --->To see the list of local branches
+git branch -r   ---->To see the list of remote branches
+git branch -a  ---> To see the list of all branches
+git branch --show-curent ---->To show the current branch is being used
+
+Jenkins :
+It is a Opensource CI/CD Tool
+Runs pipeline
+Automates builds,tests and deployments
+For windows user download manually:https://www.jenkins.io/download/     ----> To download jenkins use this link
+
+The below given code is for Linux user:
+sudo apt update
+sudo apt install openjdk-11-jdk -y
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb https://pkg.jenkins.io/debian binary/ > \
+/etc/apt/sources.list.d/jenkins.list'
+sudo apt update
+sudo apt install jenkins -y
+sudo systemctl start jenkins
+sudo systemctl status jenkins
+
+
+After downloading and completion of setup Jenkins usually starts automatically
+Default port : 8080
+http://localhost:8080  --->This is the url to open jenkins
+For Password in cmd: type "C:\ProgramData\Jenkins\.jenkins\secrets\initialAdminPassword"    ---> where actually password stores on installation 
+Paste the password and select Install suggested plugins 
+Create credentials
+
+Click on Neew Item to create a new Freeestyle job using jenkins
+Name that then choose free style
+Source Code Management: None
+Build Triggers:Build periodically    
+Inside build triggers H/5 * * * *
+Build Step:Execute Windows batch command
+Inside that paste the code whatever we needs:echo Hello DevOps
+date /t
+time /t
+wmic logicaldisk get size,freespace,caption
+Save and Build
+
+To make github with jenkins in CI:
+Add webhook in github 
