@@ -46,4 +46,10 @@ wmic logicaldisk get size,freespace,caption
 Save and Build
 
 To make github with jenkins in CI:
-Add webhook in github 
+Choose triggers as : Poll SCM then in schedule  add this H/5 * * * *
+In Source Code Management : Choose git and provide the git url and name the branch
+In Build steps choose Execute Windows batch command   in the text box add the code to run
+I added echo Hello DevOps
+date /t
+time /t
+wmic logicaldisk get size,freespace,caption    Then save and build  to change go to configure
