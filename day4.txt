@@ -1,0 +1,2 @@
+Day 4: Pipeline using jenkins and github
+Open new item in jenkins named it as  day4 pipeline then choose pipeline, in the definition choose Pipeline script from SCM then In SCM choose git and provide the credentials, in script paths let it be Jenkins file then save
