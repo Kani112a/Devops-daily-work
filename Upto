@@ -1,0 +1,63 @@
+Code Change
+   ↓
+GitHub
+   ↓
+Jenkins triggers CI
+   ↓
+Docker builds image
+   ↓
+Container runs
+   ↓
+Application LIVE
+I have a working application on my local system.
+I push the source code to GitHub.
+Jenkins is integrated with GitHub and automatically triggers a CI/CD pipeline whenever there is a code change.
+Jenkins pulls the latest code, builds a Docker image, runs the container, and deploys the application on a port.
+The application becomes live without any manual intervention.
+
+
+Jenkins pulls the latest code, builds a Docker image, runs the container, and deploys the application on a port.  ---> How this happens? in jenkins file we have return the logic it will automatically create the image and it starts using docker file.
+
+
+┌─────────────┐
+│  Developer  │
+└──────┬──────┘
+       │  git push
+       ▼
+┌─────────────┐
+│   GitHub    │
+│ (Source Code│
+│   Repo)     │
+└──────┬──────┘
+       │  Webhook / Poll SCM
+       ▼
+┌────────────────────────┐
+│        Jenkins          │
+│   (CI/CD Orchestrator)  │
+│                         │
+│  ┌──────────────────┐  │
+│  │  Clone Repository │  │
+│  └──────────────────┘  │
+│          │              │
+│  ┌──────────────────┐  │
+│  │  Build Application │ │
+│  └──────────────────┘  │
+│          │              │
+│  ┌──────────────────┐  │
+│  │  Docker Build     │  │
+│  │  (docker build)  │  │
+│  └──────────────────┘  │
+│          │              │
+│  ┌──────────────────┐  │
+│  │  Docker Run      │  │
+│  │ (docker run)     │  │
+│  └──────────────────┘  │
+│          │              │
+└──────────┼─────────────┘
+           ▼
+┌────────────────────────┐
+│     Docker Container    │
+│   (App Running Live)    │
+│     Port: 8080 / 8081   │
+└────────────────────────┘
+
