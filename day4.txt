@@ -1,2 +1,49 @@
 Day 4: Pipeline using jenkins and github
-Open new item in jenkins named it as  day4 pipeline then choose pipeline, in the definition choose Pipeline script from SCM then In SCM choose git and provide the credentials, in script paths let it be Jenkins file then save
+Open new item in jenkins named it as  day4 pipeline then choose pipeline, in the definition choose Pipeline script from SCM then In SCM choose git and provide the credentials, in script paths let it be Jenkinsfile that is what we named to write a code exactly the filename then save.
+Now build this is for pipeline as a code In day 3 it is a freestyle job now it is pipeline as a code.
+
+
+Docker:
+Install docker for linux:
+sudo apt update
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo systemctl enable docker
+docker --version
+
+
+Install docker desktop for windows
+docker version ---> to check the docker version 
+docker info ---->to get entire information about it
+docker ps ----> to list the containers running
+docker ps -a ---> to visualize all the running containers
+docker images --->to list the created images
+docker pull nginx
+docker run -d -p 8081:80 nginx
+Use the url http://localhost:8081 and access the browser.
+
+
+Create own docker image:
+I have created a docker folder inside that i created 
+vi dockerfile
+Code pasted inside dockerfile:FROM nginx
+COPY index.html /usr/share/nginx/html/index.html
+Create the html page with the name given in the dockerfile
+Paste the content
+Create the image using: docker build -t devops-nginx .    ---> . refers “Use the current directory as the build context”
+Now run the image using: docker run -d -p 8082:80 devops-nginx
+Open the browser and check: http://localhost:8082
+
+
+docker ps  --->list of running container
+docker logs containerid  ----> use the containerid showed on docker ps
+docker volume create devops-vol   ----> to create a volume and name it as devops-vol
+docker run -d -p 8083:80 \
+-v devops-vol:/usr/share/nginx/html \
+nginx   :to run 
+docker exec -it <container_id> sh
+Inside that 
+ls
+cd /usr/share/nginx/html 
+to exit from that give exit
+
