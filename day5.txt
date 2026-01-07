@@ -1,0 +1,42 @@
+Day 5:
+DOCKER COMPOSE (MULTI-CONTAINER SETUP)
+vi docker-compose.yml
+Inside the yml file:
+version: "3"
+services:
+  web:
+    image: nginx
+    ports:
+      - "8084:80"
+Run Compose:  with that start the docker desktop
+docker-compose up -d   --->to start the compose
+docker-compose ps   ---->list the running compose container
+http://localhost:8084   --->Access the url
+docker-compose down   --->To stop the compose
+
+
+JENKINS + DOCKER INTEGRATION (VERY IMPORTANT)
+Update jenkinsfile:
+pipeline {
+    agent any
+
+    stages {
+        stage('Pull Image') {
+            steps {
+                bat 'docker pull nginx'
+            }
+        }
+
+        stage('Run Container') {
+            steps {
+                bat '''
+                docker rm -f devops-nginx || echo Container not found
+                docker run -d --name devops-nginx -p 8085:80 nginx
+                '''
+            }
+        }
+    }
+}
+Build the jenkins pipeline file
+Before that run the port ---->docker run -d -p 8085:80 nginx
+then build and try to access the file: http://localhost:8085
