@@ -2,23 +2,40 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Checking out code'
+                sh 'docker build -t devops-nginx:jenkins ./docker'
             }
         }
 
-        stage('Build') {
+        stage('Run Container') {
             steps {
-                echo 'Building application'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Running tests'
+                sh 'docker run -d -p 8085:80 devops-nginx:jenkins || true'
             }
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

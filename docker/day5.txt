@@ -1,0 +1,15 @@
+Day 5:
+DOCKER COMPOSE (MULTI-CONTAINER SETUP)
+Inside docker/ folder:
+vi docker-compose.yml   ---create the file
+Inside the file:
+version: "3"
+services:
+  web:
+    image: nginx
+    ports:
+      - "8084:80"
+Run to compose: docker-compose up -d   -----> for this first start the docker desktop then run the compose
+docker-compose ps ----> to list the compose container running
+Access the url :http://localhost:8084
+To stop the compose :  docker-compose down
