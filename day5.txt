@@ -40,3 +40,5 @@ pipeline {
 Build the jenkins pipeline file
 Before that run the port ---->docker run -d -p 8085:80 nginx
 then build and try to access the file: http://localhost:8085
+
+08-01-2026
