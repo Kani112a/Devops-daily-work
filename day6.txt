@@ -1,0 +1,4 @@
+cd "C:\Program Files\Jenkins"
+start java -jar jenkins.war --httpPort=8081
+If the jenkins is stopped run the about given thing in cmd as administrator mode then start using jenkins.
+
