@@ -3,7 +3,7 @@ services:
   web:
     image: nginx
     ports:
-      - "8084:80"
+      - "8082:81"
 
 
 
