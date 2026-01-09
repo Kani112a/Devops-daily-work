@@ -14,7 +14,7 @@ pipeline {
                 bat '''
                 docker stop devops-nginx-container || exit 0
                 docker rm devops-nginx-container || exit 0
-                docker run -d --name devops-nginx-container -p 8085:81 devops-nginx:jenkins
+                docker run -d --name devops-nginx-container -p 8082:80 devops-nginx:jenkins
                 '''
             }
         }
