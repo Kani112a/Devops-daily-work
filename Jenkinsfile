@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "devops-nginx"
+        IMAGE_TAG  = "${BUILD_NUMBER}"
+    }
+
     stages {
 
         stage('Checkout') {
@@ -11,17 +16,16 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                bat 'docker build -t devops-nginx:jenkins ./docker'
+                bat "docker build -t %IMAGE_NAME%:%IMAGE_TAG% ./docker"
             }
         }
 
-        stage('Deploy Container') {
+        stage('Deploy to Kubernetes') {
             steps {
-                bat '''
-                docker stop devops-nginx-container || exit 0
-                docker rm devops-nginx-container || exit 0
-                docker run -d --name devops-nginx-container -p 8082:80 devops-nginx:jenkins
-                '''
+                bat """
+                kubectl set image deployment/nginx-deployment \
+                nginx=%IMAGE_NAME%:%IMAGE_TAG%
+                """
             }
         }
     }
