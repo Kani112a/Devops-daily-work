@@ -1,0 +1,134 @@
+Download kubectl:
+👉 https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+Place kubectl.exe in:C:\Windows\System32
+Verify:kubectl version --client
+Download minikube:
+👉 https://storage.googleapis.com/minikube/releases/latest/minikube-windows-amd64.exe
+Rename to:minikube.exe
+Place it in:C:\Windows\System32
+Verify:minikube version
+Start Minikube using Docker driver:minikube start --driver=docker
+Check status:minikube status
+To get the information:kubectl cluster-info     -----> we will get the link to run
+Verify Kubernetes Is Working:kubectl get nodes
+Before:GitHub → Jenkins → Docker → Container
+Now:GitHub → Jenkins → Docker → Kubernetes (Pods)
+Create file:pod.yaml
+Content of the file:
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
+
+Create pod:kubectl apply -f kubernetes/pod.yaml
+Use the link to run:https://127.0.0.1:59811     -----> this is taken from kubectl cluster-info Command
+Kubernetes manages containers.
+Pod is the smallest unit.
+kubectl used to interact with cluster.
+
+
+
+Upto this we did everything through docker for auto deployment, if something happens we need to do it manually for autohealing and running now we are using kubernetes
+Docker code for jenkins:
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                bat 'docker build -t devops-nginx:jenkins ./docker'
+            }
+        }
+
+        stage('Deploy Container') {
+            steps {
+                bat '''
+                docker stop devops-nginx-container || exit 0
+                docker rm devops-nginx-container || exit 0
+                docker run -d --name devops-nginx-container -p 8082:80 devops-nginx:jenkins
+                '''
+            }
+        }
+    }
+}
+
+
+
+
+Kubernetes code for jenkins:
+pipeline {
+    agent any
+
+    environment {
+        IMAGE_NAME = 'devops-nginx:jenkins'
+        POD_NAME   = 'nginx-pod'
+        KUBE_NAMESPACE = 'default'  // change if you use another namespace
+    }
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Kani112a/Devops-daily-work.git'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                bat "docker build -t ${IMAGE_NAME} ./docker"
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                // Optional: if using Docker Hub or private registry
+                // bat "docker tag ${IMAGE_NAME} yourdockerhubusername/${IMAGE_NAME}"
+                // bat "docker push yourdockerhubusername/${IMAGE_NAME}"
+                echo "Skipping push if using local Docker"
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                // Delete old pod if exists
+                bat "kubectl delete pod ${POD_NAME} --ignore-not-found=true --namespace=${KUBE_NAMESPACE}"
+
+                // Apply pod.yaml or create pod using inline manifest
+                writeFile file: 'k8s-pod.yaml', text: """
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ${POD_NAME}
+  namespace: ${KUBE_NAMESPACE}
+spec:
+  containers:
+  - name: nginx
+    image: ${IMAGE_NAME}
+    ports:
+    - containerPort: 80
+"""
+                // Apply the pod manifest
+                bat "kubectl apply -f k8s-pod.yaml"
+            }
+        }
+
+        stage('Verify Pod') {
+            steps {
+                bat "kubectl get pods -n ${KUBE_NAMESPACE}"
+            }
+        }
+    }
+}
