@@ -3,13 +3,19 @@ pipeline {
 
     stages {
 
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Build Docker Image') {
             steps {
                 bat 'docker build -t devops-nginx:jenkins ./docker'
             }
         }
 
-        stage('Run Container') {
+        stage('Deploy Container') {
             steps {
                 bat '''
                 docker stop devops-nginx-container || exit 0
@@ -20,44 +26,3 @@ pipeline {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
