@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx
+        image: devops-nginx:jenkins
+        imagePullPolicy: Never
         ports:
         - containerPort: 80
 
