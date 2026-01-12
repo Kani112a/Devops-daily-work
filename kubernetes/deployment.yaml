@@ -14,8 +14,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: devops-nginx:jenkins
-        imagePullPolicy: IfNotPresent
+        image: devops-nginx:jenkins   # initial placeholder
+        imagePullPolicy: Always       # always pull latest image
         ports:
         - containerPort: 80
-
