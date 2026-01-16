@@ -1,0 +1,38 @@
+Prometheus + Grafana (LOCAL HANDS-ON)
+mkdir monitoring
+cd monitoring
+=>Create docker-compose.yml
+services:
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+
+=>Create prometheus.yml
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+Start Monitoring Stack
+docker-compose up -d
+Access UI:
+Prometheus → http://localhost:9090
+Grafana → http://localhost:3000
+
+Grafana login:
+username: admin
+password: admin
+

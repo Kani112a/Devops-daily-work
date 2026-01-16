@@ -61,3 +61,70 @@ Jenkins pulls the latest code, builds a Docker image, runs the container, and de
 │     Port: 8080 / 8081   │
 └────────────────────────┘
 
+
+
+Blue-Green Deployment:
+You have two identical environments: Blue (current live) and Green (new version).
+Users are routed to Blue while you deploy the new version in Green.
+Once Green is tested, you switch the traffic from Blue → Green.
+Before update:
+Users → Blue (Live)
+
+Deploy new version to Green:
+Users → Blue (Live)
+Green (Test)
+
+Switch traffic:
+Users → Green (Live)
+Blue (Idle)
+
+Advantages:
+Zero downtime
+Easy rollback: If Green fails → switch back to Blue
+Safer deployments
+
+Tools:
+Jenkins pipeline can automate deployment to Blue/Green
+Load balancers handle traffic switching
+
+Zero-Downtime Updates:
+Purpose: Keep the application live while updating it.
+
+How it works:
+
+Instead of stopping the old version, you start the new version first.
+Traffic is gradually shifted to new version.
+Old version removed only after new version is stable.
+
+Advantages:
+Users never see downtime
+Supports continuous deployment
+Use case: Updating live websites or APIs
+
+Docker Compose:
+Purpose: Manage multi-container applications easily.
+
+How it works:
+You define all containers, networks, and volumes in a docker-compose.yml file.
+Run everything with one command.
+
+Advantages:
+Easy multi-container orchestration
+Reproducible environments
+Good for local development & small production apps
+
+
+
+Using linux 
+Open PowerShell as Administrator
+wsl --install
+To verify: wsl --status
+To Start Linux (Ubuntu)
+Just run:wsl
+Or 
+Open ubuntu
+To check the user: whoami
+To change or reset password:sudo passwd
+To connect github:git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+To verify the user of github:git config --list
