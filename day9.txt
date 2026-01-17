@@ -1,0 +1,181 @@
+Helm (Kubernetes Package Manager)
+Problem without Helm:
+10–50 YAML files
+Hardcoded values
+No versioning
+No rollback
+Very painful updates
+
+Helm solves this
+Packages Kubernetes apps
+Uses templates + variables
+One command to install / upgrade / rollback
+
+Cloud Platform – AWS (WHY & HOW)
+No companies deploy on local laptops
+Needs scalability, HA, security
+
+🔹 EC2 (Virtual Machines)
+Linux servers in cloud
+Used for:
+Jenkins server
+Bastion host
+Legacy apps
+DevOps Use:
+SSH
+Install Docker, Jenkins, tools
+
+🔹 IAM (Identity & Access Management)
+Security is CRITICAL.
+Controls
+Who can access AWS
+What actions allowed
+Example
+Jenkins user → only ECR + EKS access
+Golden rule
+Never use root user
+Always IAM roles
+
+🔹 VPC (Networking)
+Private network inside AWS.
+Includes
+Subnets
+Route tables
+Internet gateway
+Isolation
+Secure communication
+
+🔹 Security Groups (Firewall)
+Controls inbound/outbound traffic.
+Example
+Allow 80, 443
+Block everything else
+
+🔹 S3 (Storage)
+Used for:
+Build artifacts
+Logs
+Backups
+Terraform state
+DevOps Example:
+aws s3 cp app.jar s3://my-bucket/
+
+🔹 Load Balancer (ALB/ELB)
+Distribute traffic
+High availability
+Used with:
+EC2
+EKS
+
+🔹 ECR (Docker Registry)
+Private image storage
+Secure
+Flow
+Docker build → Push to ECR → EKS pulls image
+
+🔹 EKS (Kubernetes on AWS)
+Managed Kubernetes
+Auto scaling
+Secure
+Real production clusters
+run on EKS.
+
+🔹 EC2 (Virtual Machines)
+Linux servers in cloud
+Used for:
+Jenkins server
+Bastion host
+Legacy apps
+DevOps Use:
+SSH
+Install Docker, Jenkins, tools
+
+🔹 IAM (Identity & Access Management)
+Security is CRITICAL.
+Controls
+Who can access AWS
+What actions allowed
+Example:
+Jenkins user → only ECR + EKS access
+Golden rule
+Never use root user
+Always IAM roles
+
+🔹 VPC (Networking)
+Private network inside AWS.
+Includes:
+Subnets
+Route tables
+Internet gateway
+Isolation
+Secure communication
+
+🔹 Security Groups (Firewall)
+Controls inbound/outbound traffic.
+Example:
+Allow 80, 443
+Block everything else
+
+🔹 S3 (Storage)
+Used for:
+Build artifacts
+Logs
+Backups
+Terraform state
+DevOps Example:
+aws s3 cp app.jar s3://my-bucket/
+
+🔹 Load Balancer (ALB/ELB)
+Distribute traffic
+High availability
+Used with:
+EC2
+EKS
+
+🔹 ECR (Docker Registry)
+Private image storage
+Secure
+Flow
+Docker build → Push to ECR → EKS pulls image
+
+🔹 EKS (Kubernetes on AWS)
+Managed Kubernetes
+Auto scaling
+Secure
+Real production clusters run on EKS.
+
+
+COMPLETE REAL-WORLD DEVOPS FLOW (END-TO-END):
+Developer
+   |
+   | 1. Code Commit
+   v
+GitHub
+   |
+   | 2. CI Trigger
+   v
+Jenkins
+   |
+   | 3. Build & Scan
+   v
+Docker → Trivy
+   |
+   | 4. Push Image
+   v
+AWS ECR
+   |
+   | 5. CD Deploy
+   v
+Helm
+   |
+   | 6. Run Apps
+   v
+AWS EKS
+   |
+   | 7. Expose App
+   v
+ALB / LoadBalancer
+   |
+   | 8. Monitor
+   v
+Prometheus + Grafana
