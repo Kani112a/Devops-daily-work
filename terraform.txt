@@ -1,0 +1,41 @@
+Install terraform from hashicorp website:
+Terraform uses HCL (HashiCorp Configuration Language)
+
+Add path to Environment Variables:
+Edit the system environment variables
+Environment Variables button
+Then add as a new path
+
+To verify:terraform -v
+Then:
+mkdir terraform-day1
+cd terraform-day1
+Create a file named main.tf
+terraform {
+  required_providers {
+    local = {
+      source = "hashicorp/local"
+    }
+  }
+}
+
+provider "local" {}
+resource "local_file" "example" {
+  filename = "hello.txt"
+  content  = "Hello Terraform - Day 1"
+}
+
+Initialize Terraform: terraform init
+Plan: terraform plan
+Apply: terraform apply
+Destroy Infrastructure (Cleanup): terraform destroy   --->File deleted,Infra removed
+
+After applying what happened:
+Terraform created:
+.terraform/ → Provider plugins
+terraform.tfstate → State file
+State File:
+Tracks what Terraform created
+Used for update & destroy.
+
+Create AWS account with IAM user:

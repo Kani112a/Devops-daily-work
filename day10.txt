@@ -1,0 +1,89 @@
+Terraform:
+Terraform is an Infrastructure as Code (IaC) tool.
+You write code to create infrastructure
+
+Instead of manually clicking in AWS / Azure / GCP consoles
+Example:
+Instead of:
+Opening AWS console
+Creating EC2, VPC, Subnet, Load Balancer manually
+You write a Terraform file, run one command, and everything is created automatically.
+
+Automation,Consistency,Speed,No manual errors.Terraform helps you achieve all of these.
+
+Without Terraform :
+
+Manual setup
+Human mistakes
+Hard to repeat
+Not version-controlled
+
+With Terraform :
+Fully automated
+Same infra every time
+Can rollback
+Stored in GitHub
+Easy CI/CD integration
+
+Terraform can manage:
+Cloud Resources
+EC2 / VM
+VPC, Subnet, Route Table
+Load Balancers
+Auto Scaling Groups
+RDS / Databases
+S3 Buckets
+IAM Users & Roles
+EKS / Kubernetes clusters
+
+Terraform Architecture (Very Important)
+Terraform works using 3 main components:
+1. Provider
+Tells Terraform which cloud to use.
+Examples:
+AWS
+Azure
+Google Cloud
+Kubernetes
+Docker
+
+EX:
+provider "aws" {
+  region = "ap-south-1"
+}
+
+2.Resource
+Actual infrastructure components.
+EX:
+resource "aws_instance" "web" {
+  ami           = "ami-0abcdef123"
+  instance_type = "t2.micro"
+}
+
+3. State File (terraform.tfstate)
+Terraform remembers what it created
+Used to compare current vs desired state
+
+Usually stored in:
+S3 + DynamoDB (remote backend)
+
+Terraform Basic Commands (Must Know)
+Command     	  -  Purpose
+terraform init	  -  Initialize provider
+terraform plan	  -  Show what will be created/changed
+terraform apply	  -  Create/Update infrastructure
+terraform destroy -  Delete infrastructure
+
+Terraform File Structure (Real Project)
+terraform-project/
+main.tf        # Resources
+provider.tf    # Cloud provider
+variables.tf   # Inputs
+terraform.tfvars # Values
+outputs.tf     # Outputs
+
+Terraform -	Infrastructure provisioning
+Ansible - Configuration management
+
+Terraform creates infra
+Ansible configures servers
