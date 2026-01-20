@@ -1,0 +1,51 @@
+Ansible:
+Ansible is an open-source automation tool used to:
+Configure servers
+Install software
+Deploy applications
+Manage infrastructure
+Automate repetitive IT tasks
+
+Without Ansible
+Login to each server manually
+Run commands one by one
+High chance of human errors
+Time-consuming and not scalable
+
+With Ansible
+One command → applied to 100s of servers
+Same configuration everywhere
+Faster, repeatable, error-free automation
+
+1. Configuration Management
+Ensures all servers have:
+Same OS packages
+Same versions
+Same settings
+Example:
+Install Java + Docker on 50 servers
+Set timezone, users, permissions
+
+2. Application Deployment
+Deploy applications automatically:
+Pull code from GitHub
+Build application
+Restart services
+Example:
+Deploy a Java / .NET / Node.js app to servers
+
+3. Infrastructure Automation
+Automate infra setup:
+Create users
+Configure firewalls
+Setup Nginx, Apache
+Configure load balancers
+
+4. Orchestration
+Run tasks in sequence across multiple systems:
+Example:
+Stop application
+Take backup
+Update code
+Start application
+Health check
