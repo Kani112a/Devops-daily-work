@@ -1,0 +1,145 @@
+Helm:
+Helm is a package manager for Kubernetes.
+In Kubernetes, to deploy a real application you usually need many YAML files:
+Deployment
+Service
+ConfigMap
+Secret
+Ingress
+HPA, etc.
+
+Managing these manually causes:
+Duplicate YAML
+Hard to maintain environments (dev / qa / prod)
+Versioning issues
+Rollback is painful
+
+Helm solves all of this
+Helm packages Kubernetes YAML files into a reusable unit called a Chart.
+
+
+
+Windows (PowerShell)
+choco install kubernetes-helm
+To verify:
+helm Version
+helm create myapp
+This creates:
+myapp/
+├── Chart.yaml
+├── values.yaml
+└── templates/
+    ├── deployment.yaml
+    ├── service.yaml
+    ├── ingress.yaml
+
+
+1.Chart.yaml  :
+apiVersion: v2
+name: myapp
+version: 0.1.0
+
+Field	- Meaning
+name	- Chart name
+version	- Chart version
+
+2.values.yaml   :   This file controls deployment behavior
+replicaCount: 1
+image:
+  repository: nginx
+  tag: latest
+service:
+  type: NodePort
+  port: 80
+
+
+
+3.deployment.yaml   :   Helm replaces these at runtime.
+replicas: {{ .Values.replicaCount }}
+image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+
+
+Install Chart (LIVE DEPLOY)
+helm install myapp-release myapp/
+
+If it throws error while installing:
+1.You are using Minikube:
+minikube start
+kubectl get nodes
+helm install myapp-release myapp/
+
+2.You are using Docker Desktop Kubernetes (Windows)
+1️Open Docker Desktop
+2️Settings → Kubernetes
+3️Enable Kubernetes
+4️Apply & Restart
+
+Then:
+kubectl get nodes
+
+
+helm list
+kubectl get pods
+Your app is now running using Helm!
+
+See Generated YAML
+helm template myapp-release myapp/
+
+Upgrade the Application
+Edit values.yaml:
+replicaCount: 3
+
+Apply:
+helm upgrade myapp-release myapp/
+
+Verify:
+kubectl get pods
+
+Rollback (Production Feature):
+helm history myapp-release
+helm rollback myapp-release 1
+
+Uninstall:
+helm uninstall myapp-release
+
+deployment.yaml    ----
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Chart.Name }}
+    version: {{ .Chart.Version }}
+
+Output at runtime:
+
+name: myapp-release
+app: myapp
+version: 0.1.0
+
+Multiple Environment Support:
+Create env-specific files:
+myapp/
+├── values.yaml
+├── values-dev.yaml
+├── values-prod.yaml
+
+values-dev.yaml
+replicaCount: 1
+image:
+  tag: dev
+
+values-prod.yaml
+replicaCount: 3
+image:
+  tag: prod
+
+
+Deploy DEV
+helm install myapp-dev myapp/ -f values-dev.yaml
+
+Deploy PROD
+helm install myapp-prod myapp/ -f values-prod.yaml
+
+
+Fast Validation Command (DevOps Trick)
+helm lint ./myapp-dev/myapp
+This will pinpoint the exact file causing the issue.
