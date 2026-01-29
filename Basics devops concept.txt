@@ -1,0 +1,278 @@
+Basics:
+1.Operating System (Linux is Mandatory)
+File system (/etc, /var, /home)
+Basic commands: ls, cd, pwd, cp, mv, rm, mkdir
+File permissions (chmod, chown)
+Process management (ps, top, kill)
+Logs (/var/log)
+
+2.Networking Basics
+IP address, Port
+HTTP vs HTTPS
+DNS (how google.com works)
+Load balancer (what & why)
+Firewall (basic idea)
+
+3.Version Control – Git
+What is Git & GitHub
+git clone
+git add, git commit
+git push, git pull
+Branch basics
+
+4.Build & CI/CD Basics
+Concepts:
+What is CI (Continuous Integration)
+What is CD (Continuous Deployment)
+Pipeline flow:
+Code → Build → Test → Deploy
+Tools will use later:
+Jenkins / GitHub Actions / GitLab CI
+
+5.Containers – Docker
+What is a container
+Difference between VM vs Docker
+Dockerfile (basic)
+Image vs Container
+Run an app in Docker
+Example:
+“It works on my machine” ❌
+Docker makes it work everywhere ✅
+
+6.Container Orchestration – Kubernetes
+Basics only at first:
+Why Kubernetes is needed
+Pod, Deployment, Service
+Scaling apps
+Self-healing concept
+
+7.Cloud Basics (AWS / Azure / GCP)
+What is Cloud
+EC2 / VM
+Storage (S3 / Blob)
+Security basics (IAM concept)
+Regions & Availability Zones
+👉 Cloud = where DevOps runs
+
+8.Infrastructure as Code (IaC)
+What is IaC
+Why Terraform is used
+Basic Terraform flow:
+init → plan → apply
+
+9.Monitoring & Logging (Ops Side)
+Why monitoring is needed
+Metrics vs Logs
+Tools concept:
+Prometheus (metrics)
+Grafana (dashboard)
+
+DevOps Learning Order:
+1.Linux
+2.Git
+3.Networking basics
+4.Docker
+5.CI/CD concepts (Jenkins)
+6.Kubernetes
+7.Cloud (AWS/Azure)
+8.Terraform
+9.Monitoring basics
+
+
+NETWORKING BASICS:
+IP address → Identity of a machine
+Example: 192.168.1.10
+Port → Door number
+Example:
+80 → HTTP
+443 → HTTPS
+22 → SSH
+
+DNS - Domain name system:
+Human-friendly name → Machine IP
+
+Docker & Networking:
+Container has its own IP
+Containers talk via bridge network
+Port mapping:
+docker run -p 8080:80 nginx
+Meaning:
+Host 8080 → Container 80
+📌 Most Docker issues = wrong port mapping
+
+CI/CD (Jenkins) & Networking:
+Webhook → GitHub notifies Jenkins
+Firewall rules → Allow traffic
+Ports → Jenkins runs on 8080
+📌 If pipeline fails:
+Server unreachable
+Port blocked
+DNS not resolving
+
+Kubernetes Networking:
+Basics:
+Pod → Has IP
+Service → Stable IP / DNS
+Ingress → External access
+Pods die & recreate → IP changes
+Service gives stable networking
+
+Cloud Networking (AWS / Azure):
+Cloud = networking + servers
+Must-know terms:
+VPC → Private network
+Subnet → Smaller network
+Internet Gateway → Internet access
+Security Group → Virtual firewall
+Example:
+Allow 8080 → App works
+Block 8080 → App fails
+📌 70% cloud issues = security group / firewall
+
+Terraform & Networking:
+Terraform creates networking as code.
+What you define:
+VPC
+Subnet
+Routing
+Firewall rules
+Example:
+port = 22
+cidr = 0.0.0.0/0
+📌 One wrong port = server unreachable
+
+Monitoring & Networking:
+Monitoring depends on network flow.
+What is monitored?
+Response time
+Traffic
+Errors
+Example:
+High latency → Network issue
+Service down → Port blocked / DNS fail
+📌 Monitoring tells you where networking breaks
+
+Check Active Ports
+🔹 Windows
+netstat -ano
+🔹 Linux
+ss -tuln
+
+DNS:
+nslookup google.com
+
+Test Web Connectivity:
+curl https://www.google.com
+If HTML appears → Internet + DNS + HTTPS all working ✅
+
+NAT = Network Address Translation:
+Router converts private IP → public IP
+Without NAT ❌
+Private IPs cannot access Internet
+NAT is why:
+Many devices share one public IP
+Home Wi-Fi works
+
+Firewall:
+Firewall = Security guard
+It decides:
+Which IP can connect
+Which Port is allowed
+
+Transmission Control Protocol (TCP) : Reliable delivery
+Communications standard that enables application programs and computing devices to exchange messages over a network.
+Used by:
+HTTP / HTTPS
+SSH
+Database connections
+
+UDP (User Datagram Protocol): Fast delivery
+It is a faster, connectionless protocol that sends data without guarantees
+Used by:
+Video calls
+Live streaming
+DNS queries
+📌 Speed > reliability
+
+Load Balancer:
+Load Balancer distributes traffic across multiple servers
+
+Cloud = someone else’s computer, accessed via Internet
+Instead of:
+Buying servers
+Managing hardware
+Power, cooling, space
+
+You:
+Rent servers
+Pay only for what you use
+Scale anytime
+
+1.Virtual Machine (VM):
+A server in the cloud
+
+AWS	    Azure	            GCP
+EC2	    Virtual Machine	    Compute Engine
+
+Used for:
+Hosting apps
+Jenkins
+Databases
+Docker / Kubernetes nodes
+
+2. Storage
+Store files, backups, logs
+
+AWS	    Azure	        GCP
+S3	    Blob Storage	Cloud Storage
+
+Used for:
+App files
+Images
+Backups
+Artifacts
+📌 Object storage (not normal file system)
+
+3. Networking (Most Important)
+
+This is where DAY 1–5 helps 💪
+
+Concept 	            Meaning
+VPC	                    Your private network
+Subnet	                Smaller network
+Route Table	            Traffic rules
+Internet Gateway	    Internet access
+AWS	    Azure	GCP
+VPC	    VNet	VPC
+Subnet	Subnet	Subnet
+
+4. Security (Access Control)
+Who can access what?
+
+AWS	    Azure	    GCP
+IAM	    Azure AD	IAM
+
+Used for:
+User access
+Service permissions
+DevOps automation
+📌 Never give admin access blindly
+
+5. Load Balancer:
+
+Distributes traffic
+
+AWS	        Azure	        GCP
+ALB / ELB	Load Balancer	Cloud Load Balancer
+
+
+AWS vs Azure:
+Concept	        AWS             	Azure
+VM	            EC2	                Virtual Machine
+Network	        VPC	                VNet
+Subnet	        Subnet	            Subnet
+Firewall	    Security Group	    NSG
+Storage	        S3	                Blob
+IAM	            IAM	                Azure AD
+Kubernetes  	EKS	                AKS
+DevOps Tool 	Jenkins 	        Azure DevOps
