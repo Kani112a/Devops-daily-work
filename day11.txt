@@ -1,0 +1,85 @@
+Linux flavours:
+Cent OS
+Debian
+Ubuntu
+Red Hat
+Arch 
+SUSE
+Rocky
+Alma
+RHEL
+Amazon
+
+Alternative tools:
+1.Git (Version Control):
+Tool	    Difference
+SVN	        Centralized, slower, outdated
+Mercurial	Similar to Git but less popular
+Perforce	Used in game development
+Bazaar	    Almost obsolete
+
+2.Docker (Containerization):
+Tool	    Difference
+Podman	    Docker-compatible, rootless
+CRI-O	    Kubernetes-focused runtime
+containerd	Lightweight runtime (used internally)
+LXC/LXD	    System containers, not app-focused
+Docker = easiest
+Podman = secure enterprise choice
+
+3.Jenkins (CI/CD)
+Tool	        Difference
+GitHub Actions	CI/CD inside GitHub
+GitLab CI/CD	Integrated with GitLab
+CircleCI	    Fast SaaS
+Travis CI	    Simple, declining
+Argo CD	        GitOps-based CD
+Jenkins = powerful
+GitHub Actions = modern & easy
+
+4.Kubernetes (kubectl)
+Tool	            Difference
+Docker Swarm	    Simple, less powerful
+Nomad (HashiCorp)	Lightweight orchestrator
+OpenShift	        Enterprise Kubernetes
+Rancher	            K8s management platform
+
+5.Terraform (Infrastructure as Code)
+Tool	            Difference
+AWS CloudFormation	AWS-only
+Pulumi	            Uses real programming languages
+Ansible	            Config mgmt, not infra
+Crossplane	        Kubernetes-native IaC
+
+6.AWS (Cloud Platform)
+Cloud	        Difference
+Azure	        Strong in enterprises
+GCP	            Best for data & ML
+DigitalOcean	Simple, cheap
+Oracle Cloud	Niche
+
+7.Prometheus & Grafana (Monitoring)
+Tool	                Difference
+Datadog	                SaaS, expensive
+New Relic	            APM focused
+Zabbix	                Legacy infra
+ELK Stack	            Logs, not metrics
+InfluxDB + Telegraf	    Time-series DB
+
+8.Helm (Kubernetes Package Manager)
+Tool	    Difference
+Kustomize	YAML overlays, no templating
+Argo CD	    GitOps deployment
+Jsonnet	    Complex configs
+Flux	    GitOps controller
+
+
+Category	    Industry Standard
+VCS         	Git
+Containers	    Docker
+CI/CD	        Jenkins / GitHub Actions
+Orchestration	Kubernetes
+K8s Packaging	Helm
+IaC	            Terraform
+Cloud	        AWS
+Monitoring	    Prometheus + Grafana
