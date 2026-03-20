@@ -1,0 +1,9 @@
+Linux:
+Using cmd just install  wsl 
+Command: wsl --install 
+To verify:wsl --version
+Restart and open Ubuntu
+Set credentials 
+Using linux get into the C windows drive: cd /mnt/c 
+Install software:sudo apt install nginx
+Remove software:sudo apt remove nginx
