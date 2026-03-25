@@ -7,3 +7,12 @@ Set credentials
 Using linux get into the C windows drive: cd /mnt/c 
 Install software:sudo apt install nginx
 Remove software:sudo apt remove nginx
+
+23-03-2026
+sudo apt install git
+git --version
+Initialize repo:  git Init
+Add files:  git add .
+Commit: git commit -m "first commit"
+Connect to GitHub: git remote add origin <repo-url>
+Push code:   git push -u origin main
