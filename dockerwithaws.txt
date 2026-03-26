@@ -1,0 +1,128 @@
+Docker:
+Docker packages an application with all its dependencies into an image, so it can run consistently across different environments and be easily shared and deployed.
+
+
+Flow:
+Developer pushes code → GitHub
+Jenkins builds the project
+Docker creates an image
+Image pushed to registry (like Docker Hub)
+Server pulls image
+Runs container
+
+
+Step 1:docker --version
+STEP 2:Go to Your Project Folder
+STEP 3: Create Dockerfile
+Inside your project root, create a file named:
+👉 Dockerfile
+|
+|
+|
+# Stage 1: Build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY . .
+RUN dotnet restore
+RUN dotnet publish -c Release -o /app
+
+# Stage 2: Run
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /app
+COPY --from=build /app .
+ENTRYPOINT ["dotnet", "YourProjectName.dll"]
+
+Replace:
+YourProjectName.dll
+with your actual DLL name
+
+
+STEP 4: Build Docker Image
+docker build -t myapp .
+
+STEP 5: Run the Container
+docker run -d -p 5000:80 myapp
+
+STEP 6: Check Running Containers
+docker ps
+
+STEP 7: Stop Container
+docker stop <container_id>
+
+STEP 8 (Optional): Push to Docker Hub
+Login:
+docker login
+Tag:
+docker tag myapp username/myapp
+Push:
+docker push username/myapp
+
+
+
+Deploy this to AWS step-by-step:
+
+STEP 1: Create AWS Account
+Go to AWS and create account
+👉 Choose free tier (enough for practice)
+
+
+STEP 2: Launch EC2 Instance
+In Amazon Web Services:
+Go to EC2 Dashboard
+Click Launch Instance
+Configure:
+Name: devops-server
+OS: Ubuntu 22.04
+Instance type: t2.micro (free tier)
+Key pair: Create/download .pem file
+Security Group (IMPORTANT)
+Allow:
+SSH → Port 22
+HTTP → Port 80
+Custom → Port 5000 (for your app)
+
+
+STEP 3: Connect to EC2
+Open terminal:
+chmod 400 your-key.pem
+ssh -i your-key.pem ubuntu@<your-public-ip>
+
+
+STEP 4: Install Docker in EC2
+Run:
+sudo apt update
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo systemctl enable docker
+👉 Test:
+docker --version
+
+
+STEP 5: Give Docker Permission
+sudo usermod -aG docker ubuntu
+👉 Then logout & login again
+
+
+📦 STEP 6: Pull Your Docker Image
+If you pushed to Docker Hub:
+docker pull username/myapp
+
+
+▶️ STEP 7: Run Your Application
+docker run -d -p 80:80 username/myapp
+👉 This maps:
+EC2 port 80 → Container port 80
+
+
+🌐 STEP 8: Access Your App
+Open browser:
+http://<your-ec2-public-ip>
+🎉 Your app is LIVE!
+
+
+STEP 9: Verify Running Container
+docker ps
+
+
+🛑 STEP 10: Stop Container (if needed)
+docker stop <container_id>
