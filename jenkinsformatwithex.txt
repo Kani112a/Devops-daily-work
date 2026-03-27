@@ -1,0 +1,87 @@
+Jenkins file format:
+
+pipeline{
+    agents any
+    stages{
+        stage('Build'){
+            steps{
+                echo('Building.....')
+            }
+        }
+        stage('Test'){
+            steps{
+                echo('Testing.......')
+            }
+        }
+        stage('Deploy'){
+            steps{
+                echo('Deploying')
+            }
+        }
+    }
+}
+
+
+Explanation:
+🔹 pipeline { }
+Root block (mandatory)
+🔹 agent any
+Run pipeline on any available Jenkins agent (server)
+🔹 stages { }
+Contains all steps in pipeline
+🔹 stage('Name')
+Logical step (Build, Test, Deploy)
+🔹 steps { }
+Actual commands to execute
+
+
+
+
+Practical ex:
+
+pipeline {
+    agent any
+
+    environment {
+        IMAGE_NAME = "myapp"
+    }
+
+    stages {
+
+        stage('Checkout Code') {
+            steps {
+                git 'https://github.com/your-repo.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat 'dotnet build'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                bat 'dotnet test'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                bat 'docker build -t %IMAGE_NAME% .'
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                bat 'docker push %IMAGE_NAME%'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo 'Deploying to server...'
+            }
+        }
+    }
+}
